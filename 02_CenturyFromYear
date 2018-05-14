@@ -1,0 +1,5 @@
+int centuryFromYear(int year) {
+    int cent = ((year)-1)/100 + 1;
+    
+    return cent;
+}
