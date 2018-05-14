@@ -1,0 +1,68 @@
+String reverseParentheses(String s) {
+    int countFlips = 0; 
+    
+    for( char e : s.toCharArray()){
+        if(e==')'){
+            countFlips++;
+        }
+    }
+    
+    char[] cArr = s.toCharArray();
+    
+    int loc = 0;
+    for(int i = 0 ; i<countFlips ; i++){
+        for(int j=0;j<cArr.length;j++){
+            if(cArr[j]=='('){
+                loc=j;
+            }
+            if(cArr[j]==')'){
+                //flip between loc and j then replace loc and j with ''
+                cArr[loc]='\0';
+                cArr[j]='\0';
+                Stack stack = new Stack();
+                for(int p = loc+1 ; p < j ; p++){
+                    stack.add(cArr[p]);
+                }
+                for(int p = loc+1 ; p < j ; p++){
+                    cArr[p]=(char)stack.pop();
+                }
+                break;
+            }
+        }
+    }
+    
+    int counter = 0;
+    String result = "";
+    for(int i = 0 ; i<cArr.length ; i++){
+        if(cArr[i]!='\0'){
+            result+=cArr[i];
+        }
+    }
+    
+    
+    return result;
+}
+
+/**
+You have a string s that consists of English letters, punctuation marks, whitespace characters, and brackets. It is guaranteed that the parentheses in s form a regular bracket sequence.
+
+Your task is to reverse the strings contained in each pair of matching parentheses, starting from the innermost pair. The results string should not contain any parentheses.
+
+Example
+
+For string s = "a(bc)de", the output should be
+reverseParentheses(s) = "acbde".
+
+Input/Output
+
+[execution time limit] 3 seconds (java)
+
+[input] string s
+
+A string consisting of English letters, punctuation marks, whitespace characters and brackets. It is guaranteed that parentheses form a regular bracket sequence.
+
+Constraints:
+5 ≤ s.length ≤ 55.
+
+[output] string
+**/
